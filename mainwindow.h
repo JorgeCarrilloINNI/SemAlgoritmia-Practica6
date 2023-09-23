@@ -85,6 +85,8 @@ private slots:
 
     void on_MostraTabla_clicked();
 
+    void on_BuscarID_clicked();
+
 private:
     Ui::MainWindow *ui;
     admNeurona listaNeuronas;

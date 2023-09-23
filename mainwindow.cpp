@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <fstream>
 #include <QTableWidget>
+#include <string>
 
 using namespace std;
 
@@ -163,11 +164,29 @@ void MainWindow::on_BuscarID_clicked()
 {
     list<Neurona>& lista = listaNeuronas.listaNeurona();
     QString idBusqueda = ui->BusquedaIDText->toPlainText();
+    int encontrado = 0;
 
+    ui->TablaNeurona->setRowCount(1);
     for(Neurona &neurona : lista){
-        if(idBusqueda == neurona.getId()){
-
+        if(idBusqueda == QVariant(neurona.getId()).toString()){
+            QTableWidgetItem *itemId = new QTableWidgetItem(QString::number(neurona.getId()));
+            ui->TablaNeurona->setItem(0, 0, itemId);
+            QTableWidgetItem *itemV = new QTableWidgetItem(QString::number(neurona.getVoltaje()));
+            ui->TablaNeurona->setItem(0, 1, itemV);
+            QTableWidgetItem *itemPx = new QTableWidgetItem(QString::number(neurona.getPosX()));
+            ui->TablaNeurona->setItem(0, 2, itemPx);
+            QTableWidgetItem *itemPy = new QTableWidgetItem(QString::number(neurona.getPosY()));
+            ui->TablaNeurona->setItem(0, 3, itemPy);
+            QTableWidgetItem *itemR = new QTableWidgetItem(QString::number(neurona.getRed()));
+            ui->TablaNeurona->setItem(0, 4, itemR);
+            QTableWidgetItem *itemG = new QTableWidgetItem(QString::number(neurona.getGreen()));
+            ui->TablaNeurona->setItem(0, 5, itemG);
+            QTableWidgetItem *itemB = new QTableWidgetItem(QString::number(neurona.getBlue()));
+            ui->TablaNeurona->setItem(0, 6, itemB);
+            encontrado=1;
         }
     }
+    if(!encontrado)
+        ui->TablaNeurona->setRowCount(0);
 }
 
